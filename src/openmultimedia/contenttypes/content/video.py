@@ -16,7 +16,7 @@ class IVideo(form.Schema):
     remote_url = schema.TextLine(
         title=_(u"URL"),
         required=True,
-        default=u'http://',
+        default=u'',
         )
 
     slug = schema.TextLine(
