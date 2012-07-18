@@ -1,0 +1,10 @@
+Share and Enjoy
+---------------
+
+openmultimedia.contenttypes would not have been possible without the
+contribution of the following people:
+
+- Héctor Velarde
+
+Development sponsored by Open Multimedia.
+

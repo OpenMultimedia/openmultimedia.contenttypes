@@ -1,0 +1,20 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="openmultimedia.contenttypes">
+<body>
+
+<metal:main fill-slot="content-core">
+  <tal:content-core metal:define-macro="content-core">
+    <div>
+      <img tal:condition="nocall:context/image"
+           tal:define="scale context/@@images"
+           tal:replace="structure python: scale.scale('image', scale='preview').tag()" />
+    </div>
+  </tal:content-core>
+</metal:main>
+</body>
+</html>
