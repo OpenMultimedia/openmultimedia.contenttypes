@@ -43,8 +43,12 @@ def update_metadata(obj, event):
                 obj.slug = slug
 
             if thumbnail:
-                data = urllib2.urlopen(thumbnail)
-                obj.image = NamedImage(data.read(), filename=thumbnail)
+                try:
+                    data = urllib2.urlopen(thumbnail, timeout=3).read()
+                except urllib2.HTTPError:
+                    data = ""
+
+                obj.image = NamedImage(data, filename=thumbnail)
 
             if video_url:
                 obj.video_url = video_url
