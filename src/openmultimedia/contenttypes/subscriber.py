@@ -6,7 +6,7 @@ from DateTime import DateTime
 from zope.component import getUtility
 
 from zope.lifecycleevent.interfaces import IObjectAddedEvent
-from zope.lifecycleevent.interfaces import IObjectModifiedEvent
+#from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
 from five import grok
 
@@ -17,11 +17,11 @@ from openmultimedia.contenttypes.content.video import IVideo
 
 
 @grok.subscribe(IVideo, IObjectAddedEvent)
-@grok.subscribe(IVideo, IObjectModifiedEvent)
+#@grok.subscribe(IVideo, IObjectModifiedEvent)
 def update_metadata(obj, event):
     """ Read metadata associated with the video from the OpenMultimedia API.
     """
-    
+
     if obj.remote_url:
         video_api = getUtility(IVideoAPI)
         json = video_api.get_json(obj.remote_url)
