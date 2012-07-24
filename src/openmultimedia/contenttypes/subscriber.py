@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import urllib2
+from DateTime import DateTime
 
 from zope.component import getUtility
 
@@ -32,6 +33,7 @@ def update_metadata(obj, event):
             thumbnail = json.get('thumbnail_grande', None)
             video_url = json.get('archivo_url', None)
             audio_url = json.get('audio_url', None)
+            date = json.get('fecha', None)
 
             if title:
                 obj.title = title
@@ -41,6 +43,11 @@ def update_metadata(obj, event):
 
             if slug:
                 obj.slug = slug
+
+            if date:
+                date_obj = DateTime(date)
+                obj.effective_date = date_obj
+                obj.creation_date = date_obj
 
             if thumbnail:
                 try:
