@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import urllib2
+import logging
+logger = logging.getLogger('openmultimedia.contenttypes')
 
 from zope.component import getUtility
 
@@ -46,6 +48,10 @@ def update_metadata(obj, event):
                 try:
                     data = urllib2.urlopen(thumbnail, timeout=3).read()
                 except urllib2.HTTPError:
+                    logger.info("An error ocurred when trying to access %s" % thumbnail)
+                    data = ""
+                except urllib2.URLError:
+                    logger.info("Timeout when trying to access %s" % thumbnail)
                     data = ""
 
                 obj.image = NamedImage(data, filename=thumbnail)
