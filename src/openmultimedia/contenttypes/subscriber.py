@@ -2,12 +2,12 @@
 
 import urllib2
 import logging
-logger = logging.getLogger('openmultimedia.contenttypes')
+from DateTime import DateTime
 
 from zope.component import getUtility
 
 from zope.lifecycleevent.interfaces import IObjectAddedEvent
-from zope.lifecycleevent.interfaces import IObjectModifiedEvent
+#from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
 from five import grok
 
@@ -16,13 +16,15 @@ from plone.namedfile import NamedImage
 from openmultimedia.api.interfaces import IVideoAPI
 from openmultimedia.contenttypes.content.video import IVideo
 
+logger = logging.getLogger('openmultimedia.contenttypes')
+
 
 @grok.subscribe(IVideo, IObjectAddedEvent)
-@grok.subscribe(IVideo, IObjectModifiedEvent)
+#@grok.subscribe(IVideo, IObjectModifiedEvent)
 def update_metadata(obj, event):
     """ Read metadata associated with the video from the OpenMultimedia API.
     """
-    
+
     if obj.remote_url:
         video_api = getUtility(IVideoAPI)
         json = video_api.get_json(obj.remote_url)
@@ -34,6 +36,7 @@ def update_metadata(obj, event):
             thumbnail = json.get('thumbnail_grande', None)
             video_url = json.get('archivo_url', None)
             audio_url = json.get('audio_url', None)
+            date = json.get('fecha', None)
 
             if title:
                 obj.title = title
@@ -43,6 +46,11 @@ def update_metadata(obj, event):
 
             if slug:
                 obj.slug = slug
+
+            if date:
+                date_obj = DateTime(date)
+                obj.effective_date = date_obj
+                obj.creation_date = date_obj
 
             if thumbnail:
                 try:
