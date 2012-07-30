@@ -1,3 +1,4 @@
 <object meta_type="Plone Types Tool" name="portal_types">
  <object meta_type="Dexterity FTI" name="openmultimedia.contenttypes.video" />
+ <object meta_type="Dexterity FTI" name="openmultimedia.contenttypes.gallery" />
 </object>

@@ -46,6 +46,7 @@ setup(name='openmultimedia.contenttypes',
         'openmultimedia.api',
         'plone.app.dexterity>=1.2.1',
         'plone.app.referenceablebehavior',
+        'collective.nitf',
         ],
       extras_require={
         'test': ['plone.app.testing'],
