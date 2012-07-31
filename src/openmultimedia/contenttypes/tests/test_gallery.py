@@ -30,11 +30,11 @@ class ContentTypeTestCase(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Member'])
         self.folder = self.portal['test-folder']
 
-        self.folder.invokeFactory('openmultimedia.contenttypes.gallery', 'v1')
-        self.v1 = self.folder['v1']
+        self.folder.invokeFactory('openmultimedia.contenttypes.gallery', 'g1')
+        self.g1 = self.folder['g1']
 
     def test_adding(self):
-        self.assertTrue(IGallery.providedBy(self.v1))
+        self.assertTrue(IGallery.providedBy(self.g1))
 
     def test_fti(self):
         fti = queryUtility(IDexterityFTI, name='openmultimedia.contenttypes.gallery')
@@ -52,9 +52,9 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertTrue(IGallery.providedBy(new_object))
 
     def test_is_referenceable(self):
-        self.assertTrue(IReferenceable.providedBy(self.v1))
-        self.assertTrue(IAttributeUUID.providedBy(self.v1))
+        self.assertTrue(IReferenceable.providedBy(self.g1))
+        self.assertTrue(IAttributeUUID.providedBy(self.g1))
 
     def test_view(self):
-        view = queryMultiAdapter((self.v1, self.request), name='view')
+        view = queryMultiAdapter((self.g1, self.request), name='view')
         self.assertTrue(view is not None)

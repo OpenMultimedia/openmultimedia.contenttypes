@@ -5,8 +5,8 @@
 
  <!-- Basic metadata -->
  <property name="title" i18n:translate="">Image Gallery</property>
- <property name="description" i18n:translate="">A Image Gallery</property>
- <property name="content_icon">++resource++collective.nitf/nitf_icon.png</property>
+ <property name="description" i18n:translate="">An Image Gallery</property>
+ <property name="content_icon">++resource++openmultimedia.contenttypes/gallery_icon.png</property>
  <property name="allow_discussion">True</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
