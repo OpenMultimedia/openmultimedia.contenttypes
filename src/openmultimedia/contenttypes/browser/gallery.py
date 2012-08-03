@@ -4,6 +4,8 @@ from zope.component import getUtility
 
 from five import grok
 
+from plone.directives import dexterity
+
 from openmultimedia.contenttypes.content.gallery import IGallery
 
 from collective.nitf.browser import View as NITFView
@@ -47,7 +49,36 @@ class View(NITFView):
     @property
     def force_column(self):
         return True
-    
+
+
+# TODO: enable_form_tabbing must be user selectable
+class AddForm(dexterity.AddForm):
+    """ Default view looks like a News Item.
+    """
+    grok.name('openmultimedia.contenttypes.gallery')
+    grok.context(IGallery)
+    schema = IGallery
+    enable_form_tabbing = False
+
+    def updateWidgets(self):
+        super(AddForm, self).updateWidgets()
+        # XXX why we need to do this?
+        self.widgets['IDublinCore.description'].rows = 3
+        self.widgets['IDublinCore.description'].style = u'width: 100%;'
+
+
+class EditForm(dexterity.EditForm):
+    """ Default view looks like a News Item.
+    """
+    grok.context(IGallery)
+    schema = IGallery
+    enable_form_tabbing = False
+
+    def updateWidgets(self):
+        super(EditForm, self).updateWidgets()
+        # XXX why we need to do this?
+        self.widgets['IDublinCore.description'].rows = 3
+        self.widgets['IDublinCore.description'].style = u'width: 100%;'
 
 class Media(NITFView):
     grok.context(IGallery)

@@ -30,6 +30,13 @@ class IGallery(form.Schema):
         vocabulary=u'collective.nitf.AvailableSections',
         )
 
+    form.fieldset(
+        'categorization',
+        label=_(u'Categorization'),
+        fields=['section', 'subjects',
+                'language'],
+        )
+
 
 class Gallery(Container):
     grok.implements(IGallery, INonStructuralFolder)
