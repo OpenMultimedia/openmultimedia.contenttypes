@@ -31,7 +31,6 @@
                     noform:'close'
             });
 
-	    
             $("#sortable").sortable({
                 helper : 'clone',            
                 placeholder: "ui-state-highlight",
