@@ -25,7 +25,6 @@ class View(NITFView):
         """ Return a list of object brains inside the NITF object.
         """
         media_types = ['Image']
-
         return self._get_brains(media_types)
 
     def get_prettydate(self, obj):

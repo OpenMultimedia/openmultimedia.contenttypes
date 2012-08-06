@@ -22,7 +22,9 @@
 
                 <div class="item-gallery" tal:define="media_obj python:media.getObject()">
                         <tal:imgobj tal:define="scale media_obj/@@images">
-                        <img tal:replace="structure python:scale.scale('image', width=620, direction='down').tag()"/>
+                        <img tal:replace="structure python:scale.scale('image', width=120, direction='down').tag()"/>
+                        <span tal:attributes="data-fullurl python:media_obj.absolute_url() + '/image'" style="display:none"/>
+                        <div tal:content="media_obj/Description" style="display:none"/>
                         </tal:imgobj>
                 </div>
             </tal:multimedia>
@@ -31,6 +33,7 @@
         </article>
         <div id="gallery-modal"><div class="gallery-modal-container">
             <img />
+            <div class="gallery-img-description"/>
             <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
             <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
             <div class="close" i18n:translate="">X</div>

@@ -4,6 +4,8 @@ from five import grok
 from zope import schema
 from zope.component import getUtility
 
+from plone.app.textfield import RichText
+
 from plone.directives import form
 
 from plone.dexterity.content import Container
@@ -20,6 +22,12 @@ from collective.nitf.controlpanel import INITFSettings
 class IGallery(form.Schema):
     """A Gallery item based on the News Industry Text Format specification.
     """
+
+    text = RichText(
+        # nitf/body/body.content
+        title=_(u'Body text'),
+        required=False,
+        )
 
     section = schema.Choice(
         # nitf/head/pubdata/@position.section
