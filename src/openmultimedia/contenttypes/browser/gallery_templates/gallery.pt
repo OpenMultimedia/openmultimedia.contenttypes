@@ -6,10 +6,11 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="openmultimedia.contenttypes">
 <body>
+<metal:block fill-slot="abovecontent"></metal:block>
 <metal:main fill-slot="main" tal:define="sr python:True">
     <tal:block metal:define-macro="main">
         <article id="article" tal:define="has_media view/has_media">
-            <div tal:replace="structure provider:plone.abovecontenttitle" />
+            <!-- <div tal:replace="structure provider:plone.abovecontenttitle" /> -->
             <header class="header">
                 <h1 class="documentFirstHeading" tal:content="context/title" />
                 <div class="article-metadata">
@@ -32,11 +33,14 @@
             </div>
         </article>
         <div id="gallery-modal"><div class="gallery-modal-container">
-            <img />
+            <img alt=""/>
             <div class="gallery-img-description"/>
             <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
             <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-            <div class="close" i18n:translate="">X</div>
+            <div class="close" i18n:translate="">
+                <i class="icon-delete icon-white"></i>
+                <span class="icon-description">cerrar</span>
+            </div>
         </div></div>
     </tal:block>
 </metal:main>
