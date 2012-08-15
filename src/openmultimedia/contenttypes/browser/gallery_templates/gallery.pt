@@ -10,7 +10,7 @@
 <metal:main fill-slot="main" tal:define="sr python:True">
     <tal:block metal:define-macro="main">
         <article id="article" tal:define="has_media view/has_media">
-            <!-- <div tal:replace="structure provider:plone.abovecontenttitle" /> -->
+            <div tal:replace="structure provider:plone.abovecontenttitle" />
             <header class="header">
                 <h1 class="documentFirstHeading" tal:content="context/title" />
                 <div class="article-metadata">
