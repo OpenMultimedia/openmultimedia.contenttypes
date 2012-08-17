@@ -25,7 +25,7 @@
                         <tal:imgobj tal:define="scale media_obj/@@images">
                         <img tal:replace="structure python:scale.scale('image', width=120, direction='down').tag()"/>
                         <span tal:attributes="data-fullurl python:media_obj.absolute_url() + '/image'" style="display:none"/>
-                        <div tal:content="media_obj/Description" style="display:none"/>
+                        <div tal:content="python:view.get_description(media_obj)" style="display:none"/>
                         </tal:imgobj>
                 </div>
             </tal:multimedia>

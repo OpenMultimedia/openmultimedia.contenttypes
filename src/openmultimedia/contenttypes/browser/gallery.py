@@ -26,6 +26,12 @@ class View(NITFView):
         """
         media_types = ['Image']
         return self._get_brains(media_types)
+    
+    def get_description(self, obj):
+        if obj.Description():
+            return obj.Description()
+        else:
+            return self.context.Description()
 
     def get_prettydate(self, obj):
         date_utility = getUtility(IPrettyDate)
