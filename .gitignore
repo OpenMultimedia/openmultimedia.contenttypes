@@ -8,7 +8,9 @@ bin/
 develop-eggs/
 downloads/
 eggs/
-parts/
-var/
 include/
 lib/
+parts/
+src/collective.nitf
+src/openmultimedia.api
+var/
