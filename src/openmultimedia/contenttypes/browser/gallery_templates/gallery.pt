@@ -48,7 +48,7 @@
 </metal:main>
 <metal:block:column fill-slot="column_slot">
     <tal:related tal:define="related python:view.get_related_items() if hasattr(view, 'get_related_items') else ''">
-    <div id="related-items" tal:condition="related">
+    <div id="related-items" class="tile" tal:condition="related">
         <h4 class="portletHeader" i18n:translate="">Related News</h4>
         <div class="article-related" tal:repeat="related_item related">
             <div class="article-metadata">
@@ -58,8 +58,14 @@
             <a tal:attributes="href related_item/absolute_url"><span tal:content="related_item/Title"></span></a>
         </div>
     </div>
-    <div id="video-galery">
+   <div class="news-ads ads tile">
+        <iframe id="a2c9a0c7" name="a2c9a0c7" src="http://delivery.pubads.biz/www/delivery/afr.php?zoneid=41&amp;target=_top" frameborder="0" scrolling="no" width="300" height="250"><a href="http://delivery.pubads.biz/www/delivery/ck.php?n=a7bacac3" target="_top"><img src="http://delivery.pubads.biz/www/delivery/avw.php?zoneid=41&amp;n=a7bacac3" border="0" alt="" /></a></iframe>
+    </div>
+    <div id="video-galery" class="tile">
         <div tal:attributes="data-tile python:context.absolute_url()+'/@@vtv.portada.vtvrecentvideos/b00bs'"></div>
+    </div>
+    <div class="news-ads ads tile">
+        <iframe id="aa980dd7" name="aa980dd7" src="http://delivery.pubads.biz/www/delivery/afr.php?zoneid=42&amp;target=_top" frameborder="0" scrolling="no" width="300" height="600"><a href="http://delivery.pubads.biz/www/delivery/ck.php?n=af908193" target="_top"><img src="http://delivery.pubads.biz/www/delivery/avw.php?zoneid=42&amp;n=af908193" border="0" alt="" /></a></iframe>
     </div>
     </tal:related>
 </metal:block:column>
