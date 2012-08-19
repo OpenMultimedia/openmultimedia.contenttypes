@@ -44,5 +44,22 @@
         </div></div>
     </tal:block>
 </metal:main>
+<metal:block:column fill-slot="column_slot">
+    <tal:related tal:define="related python:view.get_related_items() if hasattr(view, 'get_related_items') else ''">
+    <div id="related-items" tal:condition="related">
+        <h4 class="portletHeader" i18n:translate="">Related News</h4>
+        <div class="article-related" tal:repeat="related_item related">
+            <div class="article-metadata">
+                <span class="section" tal:content="related_item/section"></span>-
+                <span class="prettydate" tal:content="python:view.get_prettydate(related_item)"></span>
+            </div>
+            <a tal:attributes="href related_item/absolute_url"><span tal:content="related_item/Title"></span></a>
+        </div>
+    </div>
+    <div id="video-galery">
+        <div tal:attributes="data-tile python:context.absolute_url()+'/@@vtv.portada.vtvrecentvideos/b00bs'"></div>
+    </div>
+    </tal:related>
+</metal:block:column>
 </body>
 </html>
