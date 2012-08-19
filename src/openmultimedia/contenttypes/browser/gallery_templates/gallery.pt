@@ -17,6 +17,8 @@
                     <span class="section" tal:content="context/section"></span> -
                     <span class="prettydate" tal:content="python:view.get_prettydate(context)"></span>
                 </div>
+                <div tal:replace="structure provider:plone.belowcontenttitle" />
+
             </header>
             <div id="gallery">
             <tal:multimedia tal:repeat="media view/get_media">
