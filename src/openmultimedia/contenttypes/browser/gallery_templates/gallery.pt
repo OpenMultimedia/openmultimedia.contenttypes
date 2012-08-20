@@ -24,11 +24,17 @@
             <tal:multimedia tal:repeat="media view/get_media">
 
                 <div class="item-gallery" tal:define="media_obj python:media.getObject()">
-                        <tal:imgobj tal:define="scale media_obj/@@images">
-                        <img tal:replace="structure python:scale.scale('image', width=120, direction='down').tag()"/>
+                    <tal:imgobj tal:define="scale media_obj/@@images">
+                        <img class="lazy" 
+                            tal:define="thumbnail python:scale.scale('image', width=120, direction='down');"
+                            tal:condition="thumbnail"
+                            tal:attributes="src string:blank.gif;
+                                            width thumbnail/width;
+                                            height thumbnail/height;
+                                            data-original thumbnail/url"/>
                         <span tal:attributes="data-fullurl python:media_obj.absolute_url() + '/image'" style="display:none"/>
                         <div tal:content="python:view.get_description(media_obj)" style="display:none"/>
-                        </tal:imgobj>
+                    </tal:imgobj>
                 </div>
             </tal:multimedia>
             <div style="clear:both;"></div>
