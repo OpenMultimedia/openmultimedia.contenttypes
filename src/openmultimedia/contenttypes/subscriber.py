@@ -12,11 +12,27 @@ from zope.lifecycleevent.interfaces import IObjectAddedEvent
 from five import grok
 
 from plone.namedfile import NamedImage
+from plone.app.blob.interfaces import IATBlob
+from Products.ATContentTypes.interface import IATImage
+from zope.component import getMultiAdapter
 
 from openmultimedia.api.interfaces import IVideoAPI
 from openmultimedia.contenttypes.content.video import IVideo
 
 logger = logging.getLogger('openmultimedia.contenttypes')
+
+IMAGE_SCALES = [
+    #galleries
+    {'width': 195, 'height': 145},
+    #section
+    {'width': 460, 'height': 270},
+    {'width': 200, 'height': 150},
+    #nitf
+    {'width': 100, 'height': 100},
+    {'width': 620, 'direction': 'down'},
+    #carousel
+    {'width': 640, 'direction': 'down'},
+]
 
 
 @grok.subscribe(IVideo, IObjectAddedEvent)
@@ -69,3 +85,12 @@ def update_metadata(obj, event):
 
             if audio_url:
                 obj.audio_url = audio_url
+
+
+@grok.subscribe(IATImage, IObjectAddedEvent)
+#@grok.subscribe(IVideo, IObjectModifiedEvent)
+def images_size_generation(obj, event):
+    image = getMultiAdapter((obj, obj.REQUEST), name='images')
+    scale = image.scale
+    for size in IMAGE_SCALES:
+        scale('image', **size)
