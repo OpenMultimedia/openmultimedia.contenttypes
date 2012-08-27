@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2012-08-03 15:05+0000\n"
-"PO-Revision-Date: 2012-06-01 16:49-0300\n"
+"POT-Creation-Date: 2012-08-27 21:22+0000\n"
+"PO-Revision-Date: 2012-08-27 18:22-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Spanish <>\n"
 "MIME-Version: 1.0\n"
@@ -34,6 +34,18 @@ msgstr "Una Galería de Imagenes"
 msgid "Audio URL"
 msgstr ""
 
+#: openmultimedia/contenttypes/content/gallery.py:28
+msgid "Body text"
+msgstr ""
+
+#: openmultimedia/contenttypes/content/gallery.py:43
+msgid "Categorization"
+msgstr "Categorización"
+
+#: openmultimedia/contenttypes/browser/gallery_templates/gallery.pt:50
+msgid "Close"
+msgstr "Cerrar"
+
 #: configure.zcml
 msgid "Displays a scrollable gallery in the news article"
 msgstr "Muestra una galería de fotos en el artículo de noticias"
@@ -58,17 +70,21 @@ msgstr "Medios"
 msgid "News Article View"
 msgstr "Vista de artículo de noticias"
 
+#: openmultimedia/contenttypes/browser/gallery_templates/gallery.pt:58
+msgid "Related News"
+msgstr "Noticias relacionadas"
+
 #: configure.zcml
 msgid "Scrollable Gallery View"
 msgstr "Vista de galería de fotos"
 
-#: openmultimedia/contenttypes/content/gallery.py:26
+#: openmultimedia/contenttypes/content/gallery.py:34
 msgid "Section"
 msgstr "Sección"
 
 #: openmultimedia/contenttypes/content/video.py:23
 msgid "Slug"
-msgstr ""
+msgstr "Slug"
 
 #: openmultimedia/contenttypes/content/video.py:17
 msgid "URL"
@@ -86,12 +102,8 @@ msgstr ""
 msgid "Video URL"
 msgstr ""
 
-#: openmultimedia/contenttypes/browser/gallery_templates/gallery.pt:36
-msgid "X"
-msgstr ""
-
 #. Default: "Named section where the article will appear."
-#: openmultimedia/contenttypes/content/gallery.py:27
+#: openmultimedia/contenttypes/content/gallery.py:35
 msgid "help_section"
 msgstr "Nombre de la sección en la que aparecerá el artículo."
 
