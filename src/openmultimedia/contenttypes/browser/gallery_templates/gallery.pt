@@ -45,9 +45,9 @@
             <div class="gallery-img-description"/>
             <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
             <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-            <div class="close" i18n:translate="">
+            <div class="close">
                 <i class="icon-delete icon-white"></i>
-                <span class="icon-description">cerrar</span>
+                <span class="icon-description" i18n:translate="">Close</span>
             </div>
         </div></div>
     </tal:block>
