@@ -7,11 +7,14 @@ from DateTime import DateTime
 from zope.component import getUtility
 
 from zope.lifecycleevent.interfaces import IObjectAddedEvent
-#from zope.lifecycleevent.interfaces import IObjectModifiedEvent
+from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
 from five import grok
 
 from plone.namedfile import NamedImage
+
+from plone.app.imaging.interfaces import IImageScaleHandler
+
 from plone.app.blob.interfaces import IATBlob
 from Products.ATContentTypes.interface import IATImage
 from zope.component import getMultiAdapter
@@ -20,19 +23,6 @@ from openmultimedia.api.interfaces import IVideoAPI
 from openmultimedia.contenttypes.content.video import IVideo
 
 logger = logging.getLogger('openmultimedia.contenttypes')
-
-IMAGE_SCALES = [
-    #galleries
-    {'width': 195, 'height': 145},
-    #section
-    {'width': 460, 'height': 270},
-    {'width': 200, 'height': 150},
-    #nitf
-    {'width': 100, 'height': 100},
-    {'width': 620, 'direction': 'down'},
-    #carousel
-    {'width': 640, 'direction': 'down'},
-]
 
 
 @grok.subscribe(IVideo, IObjectAddedEvent)
@@ -87,10 +77,20 @@ def update_metadata(obj, event):
                 obj.audio_url = audio_url
 
 
-@grok.subscribe(IATImage, IObjectAddedEvent)
-#@grok.subscribe(IVideo, IObjectModifiedEvent)
-def images_size_generation(obj, event):
+# @grok.subscribe(IATImage, IObjectAddedEvent)
+@grok.subscribe(IATImage, IObjectModifiedEvent)
+def images_size_generation(obj, event):    
+
+    field = obj.Schema()['image']
     image = getMultiAdapter((obj, obj.REQUEST), name='images')
-    scale = image.scale
-    for size in IMAGE_SCALES:
-        scale('image', **size)
+    scale_img = image.scale
+    available = field.getAvailableSizes(obj)
+
+    directions = ['down',]
+
+    for scale in available:
+        scale_img('image', scale=scale)
+        for direction in directions:
+            scale_img('image', scale=scale, direction=direction)
+
+    handler = IImageScaleHandler(field, None)
