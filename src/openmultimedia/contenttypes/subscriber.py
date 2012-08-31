@@ -93,4 +93,14 @@ def images_size_generation(obj, event):
         for direction in directions:
             scale_img('image', scale=scale, direction=direction)
 
+    special_cases = [
+        #vtv/web/theme/tiles/templates/carousel.pt
+        {'width':640, 'direction':'down'},
+        #vtv/web/theme/templates/nitf_view.pt
+        {'width':620, 'direction':'down'},
+    ]
+
+    for params in special_cases:
+        scale_img('image', **params)
+
     handler = IImageScaleHandler(field, None)
