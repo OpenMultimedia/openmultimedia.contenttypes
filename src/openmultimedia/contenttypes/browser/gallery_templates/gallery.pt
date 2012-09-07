@@ -28,7 +28,7 @@
                 <div class="item-gallery" tal:define="media_obj python:media.getObject()">
                     <tal:imgobj tal:define="scale media_obj/@@images">
                         <img class="lazy" 
-                            tal:define="thumbnail python:scale.scale('image', scale='gallery', direction='down');"
+                            tal:define="thumbnail python:scale.scale('image', scale='gallery');"
                             tal:condition="thumbnail"
                             tal:attributes="src string:blank.gif;
                                             width thumbnail/width;
