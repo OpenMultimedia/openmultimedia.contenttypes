@@ -7,17 +7,12 @@ from DateTime import DateTime
 from zope.component import getUtility
 
 from zope.lifecycleevent.interfaces import IObjectAddedEvent
-from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
 from five import grok
 
 from plone.namedfile import NamedImage
 
-from plone.app.imaging.interfaces import IImageScaleHandler
-
 from plone.app.blob.interfaces import IATBlob
-from Products.ATContentTypes.interface import IATImage
-from zope.component import getMultiAdapter
 
 from openmultimedia.api.interfaces import IVideoAPI
 from openmultimedia.contenttypes.content.video import IVideo
@@ -26,7 +21,6 @@ logger = logging.getLogger('openmultimedia.contenttypes')
 
 
 @grok.subscribe(IVideo, IObjectAddedEvent)
-#@grok.subscribe(IVideo, IObjectModifiedEvent)
 def update_metadata(obj, event):
     """ Read metadata associated with the video from the OpenMultimedia API.
     """
@@ -75,32 +69,3 @@ def update_metadata(obj, event):
 
             if audio_url:
                 obj.audio_url = audio_url
-
-
-# @grok.subscribe(IATImage, IObjectAddedEvent)
-@grok.subscribe(IATImage, IObjectModifiedEvent)
-def images_size_generation(obj, event):    
-
-    field = obj.Schema()['image']
-    image = getMultiAdapter((obj, obj.REQUEST), name='images')
-    scale_img = image.scale
-    available = field.getAvailableSizes(obj)
-
-    directions = ['down',]
-
-    for scale in available:
-        scale_img('image', scale=scale)
-        for direction in directions:
-            scale_img('image', scale=scale, direction=direction)
-
-    special_cases = [
-        #vtv/web/theme/tiles/templates/carousel.pt
-        {'width':640, 'direction':'down'},
-        #vtv/web/theme/templates/nitf_view.pt
-        {'width':620, 'direction':'down'},
-    ]
-
-    for params in special_cases:
-        scale_img('image', **params)
-
-    handler = IImageScaleHandler(field, None)
