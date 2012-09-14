@@ -16,6 +16,11 @@
         title="openmultimedia.contenttypes: Add Video"
         />
 
+    <permission
+        id="openmultimedia.contenttypes.AddAudio"
+        title="openmultimedia.contenttypes: Add Audio"
+        />
+
     <grok:grok package="." />
 
     <include file="profiles.zcml" />
