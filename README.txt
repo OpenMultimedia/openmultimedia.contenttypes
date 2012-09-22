@@ -7,7 +7,7 @@ openmultimedia.contenttypes
 Life, the Universe, and Everything
 ----------------------------------
 
-TBA.
+Content types for Open Multimedia projects.
 
 Don't Panic
 -----------
@@ -17,7 +17,9 @@ TBA.
 Mostly Harmless
 ---------------
 
+.. image:: https://secure.travis-ci.org/openmultimedia/openmultimedia.contenttypes.png
+    :target: http://travis-ci.org/openmultimedia/openmultimedia.contenttypes
+
 Have an idea? Found a bug? Let us know by `opening a support ticket`_.
 
-.. _`opening a support ticket`: https://github.com/desarrollotv/openmultimedia.contenttypes/issues
-
+.. _`opening a support ticket`: https://github.com/openmultimedia/openmultimedia.contenttypes/issues
