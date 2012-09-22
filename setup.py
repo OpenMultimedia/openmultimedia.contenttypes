@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 import os
 
 version = '1.0a1.dev0'
-description = "Content types for OpenMultimedia projects."
+description = "Content types for Open Multimedia projects."
 long_description = open("README.txt").read() + "\n" + \
                    open(os.path.join("docs", "INSTALL.txt")).read() + "\n" + \
                    open(os.path.join("docs", "CREDITS.txt")).read() + "\n" + \
@@ -19,6 +19,7 @@ setup(name='openmultimedia.contenttypes',
         "Environment :: Web Environment",
         "Framework :: Plone",
         "Framework :: Plone :: 4.2",
+#        "Framework :: Plone :: 4.3",
         "Intended Audience :: End Users/Desktop",
         "Intended Audience :: System Administrators",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
@@ -33,7 +34,7 @@ setup(name='openmultimedia.contenttypes',
       keywords='plone dexterity',
       author='Héctor Velarde',
       author_email='hector.velarde@gmail.com',
-      url='https://github.com/desarrollotv/openmultimedia.contenttypes',
+      url='https://github.com/openmultimedia/openmultimedia.contenttypes',
       license='GPLv2',
       packages=find_packages('src'),
       package_dir={'': 'src'},
