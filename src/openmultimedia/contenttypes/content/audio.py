@@ -16,16 +16,19 @@ class IAudio(form.Schema):
         title=_(u"URL"),
         required=True,
         default=u'',
+        readonly=True,
         )
 
     slug = schema.TextLine(
         title=_(u"Slug"),
         required=False,
+        readonly=True,
         )
 
     audio_url = schema.TextLine(
         title=_(u"Audio URL"),
         required=False,
+        readonly=True,
         )
 
 
