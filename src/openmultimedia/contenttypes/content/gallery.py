@@ -47,7 +47,7 @@ class IGallery(form.Schema):
 
 
 class Gallery(Container):
-    grok.implements(IGallery, INonStructuralFolder)
+    grok.implements(IGallery)
 
 
 @form.default_value(field=IGallery['section'])
