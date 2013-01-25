@@ -71,8 +71,9 @@ def update_metadata(obj, event):
             if audio_url:
                 obj.audio_url = audio_url
 
+
 @grok.subscribe(IAudio, IObjectAddedEvent)
-def update_metadata(obj, event):
+def update_metadata_audio(obj, event):
     """ Read metadata associated with the audio from the OpenMultimedia API.
     """
 
@@ -84,6 +85,7 @@ def update_metadata(obj, event):
             title = json.get('titulo', None)
             description = json.get('descripcion', None)
             slug = json.get('slug', None)
+            thumbnail = json.get('thumbnail_grande', None)
             audio_url = json.get('audio_url', None)
             date = json.get('fecha', None)
 
@@ -100,6 +102,18 @@ def update_metadata(obj, event):
                 date_obj = DateTime(date)
                 obj.effective_date = date_obj
                 obj.creation_date = date_obj
+
+            if thumbnail:
+                try:
+                    data = urllib2.urlopen(thumbnail, timeout=3).read()
+                except urllib2.HTTPError:
+                    logger.info("An error ocurred when trying to access %s" % thumbnail)
+                    data = ""
+                except urllib2.URLError:
+                    logger.info("Timeout when trying to access %s" % thumbnail)
+                    data = ""
+
+                obj.image = NamedImage(data, filename=thumbnail)
 
             if audio_url:
                 obj.audio_url = audio_url

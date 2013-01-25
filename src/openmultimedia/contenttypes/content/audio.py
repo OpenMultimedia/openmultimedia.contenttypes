@@ -4,6 +4,7 @@ from zope import schema
 
 from plone.dexterity.content import Item
 from plone.directives import form
+from plone.namedfile.field import NamedImage
 
 from openmultimedia.contenttypes import _
 
@@ -23,6 +24,11 @@ class IAudio(form.Schema):
         title=_(u"Slug"),
         required=False,
         readonly=True,
+        )
+
+    image = NamedImage(
+        title=_(u"Image"),
+        required=False,
         )
 
     audio_url = schema.TextLine(
