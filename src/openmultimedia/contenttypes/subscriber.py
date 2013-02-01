@@ -25,7 +25,6 @@ logger = logging.getLogger('openmultimedia.contenttypes')
 def update_metadata(obj, event):
     """ Read metadata associated with the video from the OpenMultimedia API.
     """
-
     if obj.remote_url:
         video_api = getUtility(IVideoAPI)
         json = video_api.get_json(obj.remote_url)
@@ -76,7 +75,6 @@ def update_metadata(obj, event):
 def update_metadata_audio(obj, event):
     """ Read metadata associated with the audio from the OpenMultimedia API.
     """
-
     if obj.remote_url:
         video_api = getUtility(IVideoAPI)
         json = video_api.get_json(obj.remote_url)
@@ -86,7 +84,7 @@ def update_metadata_audio(obj, event):
             description = json.get('descripcion', None)
             slug = json.get('slug', None)
             thumbnail = json.get('thumbnail_grande', None)
-            audio_url = json.get('audio_url', None)
+            audio_url = json.get('archivo_url', None)
             date = json.get('fecha', None)
 
             if title:
@@ -114,6 +112,5 @@ def update_metadata_audio(obj, event):
                     data = ""
 
                 obj.image = NamedImage(data, filename=thumbnail)
-
             if audio_url:
                 obj.audio_url = audio_url
