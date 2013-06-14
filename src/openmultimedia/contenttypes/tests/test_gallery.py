@@ -1,23 +1,26 @@
 # -*- coding: utf-8 -*-
 
-import unittest2 as unittest
-
-from zope.component import createObject
-from zope.component import queryUtility, queryMultiAdapter
-from zope.interface import directlyProvides
-
-from plone.dexterity.interfaces import IDexterityFTI
-from plone.uuid.interfaces import IAttributeUUID
-
-from plone.app.referenceablebehavior.referenceable import IReferenceable
-
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import setRoles
-
-from collective.nitf.interfaces import INITFLayer
-
 from openmultimedia.contenttypes.content.gallery import IGallery
 from openmultimedia.contenttypes.testing import INTEGRATION_TESTING
+from plone.app.referenceablebehavior.referenceable import IReferenceable
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.dexterity.interfaces import IDexterityFTI
+from plone.uuid.interfaces import IAttributeUUID
+from zope.component import createObject
+from zope.component import queryMultiAdapter
+from zope.component import queryUtility
+from zope.interface import directlyProvides
+
+import pkg_resources
+import unittest2 as unittest
+
+# XXX: just to keep compatibility with collective.nitf 1.0a3 and Plone 4.1
+PLONE_VERSION = pkg_resources.require("Plone")[0].version
+if '4.1' in PLONE_VERSION:
+    from collective.nitf.interfaces import INITFBrowserLayer as INITFLayer
+else:
+    from collective.nitf.interfaces import INITFLayer
 
 
 class ContentTypeTestCase(unittest.TestCase):
@@ -34,8 +37,11 @@ class ContentTypeTestCase(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Member'])
         self.folder = self.portal['test-folder']
 
-        self.folder.invokeFactory('openmultimedia.contenttypes.gallery', 
-            'g1', description="gallery desctiption")
+        self.folder.invokeFactory(
+            'openmultimedia.contenttypes.gallery',
+            'g1',
+            description="gallery desctiption",
+        )
         self.g1 = self.folder['g1']
 
     def test_adding(self):
@@ -59,10 +65,10 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_is_referenceable(self):
         self.assertTrue(IReferenceable.providedBy(self.g1))
         self.assertTrue(IAttributeUUID.providedBy(self.g1))
-    
+
     def test_image_description(self):
         """
-        Here we test that calling image.Description() on an image that doesn't 
+        Here we test that calling image.Description() on an image that doesn't
         have a description. doesn't bring the parent description.
         """
         self.g1.invokeFactory('Image', id="image1", description="image description test")
@@ -76,8 +82,8 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def test_view(self):
         view = queryMultiAdapter((self.g1, self.request), name='view')
-        self.assertTrue(view is not None)      
-    
+        self.assertTrue(view is not None)
+
     def test_view_get_description(self):
         self.g1.invokeFactory('Image', id="image1", description="image description test")
         self.g1.invokeFactory('Image', id="image2")
